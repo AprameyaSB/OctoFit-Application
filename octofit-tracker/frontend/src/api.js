@@ -1,3 +1,12 @@
+/*
+  Frontend API URLs use the GitHub Codespaces preview host when available:
+  - https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities
+  - https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts
+  - https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users
+  - https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams
+  - https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard
+*/
+
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim() || ''
 
 function getDefaultApiHost() {
