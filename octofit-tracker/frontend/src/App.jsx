@@ -1,10 +1,12 @@
 import { Routes, Route, NavLink } from 'react-router-dom'
 import './App.css'
 
-const codespaceName = import.meta.env.CODESPACE_NAME || import.meta.env.VITE_CODESPACE_NAME || ''
-const apiBaseUrl = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000'
+const currentHost = window.location.hostname
+const apiBaseUrl = currentHost === 'localhost' || currentHost === '127.0.0.1'
+  ? 'http://localhost:8000'
+  : currentHost.includes('.app.github.dev')
+    ? `https://${currentHost.replace('-5173.', '-8000.')}`
+    : 'http://localhost:8000'
 
 function Home() {
   return (
