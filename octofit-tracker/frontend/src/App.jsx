@@ -1,12 +1,15 @@
 import { Routes, Route, NavLink } from 'react-router-dom'
+import Activities from './components/Activities.jsx'
+import Leaderboard from './components/Leaderboard.jsx'
+import Teams from './components/Teams.jsx'
+import Users from './components/Users.jsx'
+import Workouts from './components/Workouts.jsx'
+import { getApiBaseUrl, getApiEndpoint } from './api.js'
 import './App.css'
 
-const currentHost = window.location.hostname
-const apiBaseUrl = currentHost === 'localhost' || currentHost === '127.0.0.1'
-  ? 'http://localhost:8000'
-  : currentHost.includes('.app.github.dev')
-    ? `https://${currentHost.replace('-5173.', '-8000.')}`
-    : 'http://localhost:8000'
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+const apiBaseUrl = getApiBaseUrl()
+const healthUrl = `${apiBaseUrl}/api/health`
 
 function Home() {
   return (
@@ -17,14 +20,28 @@ function Home() {
           <p className="lead text-muted">
             Track workouts, grow with your team, and stay motivated with a modern multi-tier experience.
           </p>
-          <div className="d-flex gap-3">
-            <a className="btn btn-primary btn-lg" href={`${apiBaseUrl}/api/health`}>
+          <div className="d-flex gap-3 flex-wrap">
+            <a className="btn btn-primary btn-lg" href={healthUrl}>
               Check API health
             </a>
             <a className="btn btn-outline-secondary btn-lg" href="https://vite.dev/" target="_blank" rel="noreferrer">
               Vite docs
             </a>
           </div>
+          <div className="mt-4">
+            <p className="mb-1">
+              <strong>API host:</strong> <code>{apiBaseUrl}</code>
+            </p>
+            <p className="mb-0">
+              <strong>Codespace variable:</strong>{' '}
+              <code>{codespaceName ?? 'unset'}</code>
+            </p>
+          </div>
+          {!codespaceName && (
+            <div className="alert alert-warning mt-4">
+              <strong>VITE_CODESPACE_NAME</strong> is not defined. Add it to <code>.env.local</code> to use Codespaces preview API URLs.
+            </div>
+          )}
         </div>
         <div className="col-lg-5">
           <div className="card shadow-sm border-0">
@@ -53,12 +70,33 @@ function App() {
             <NavLink className="nav-link" to="/">
               Home
             </NavLink>
+            <NavLink className="nav-link" to="/activities">
+              Activities
+            </NavLink>
+            <NavLink className="nav-link" to="/leaderboard">
+              Leaderboard
+            </NavLink>
+            <NavLink className="nav-link" to="/teams">
+              Teams
+            </NavLink>
+            <NavLink className="nav-link" to="/users">
+              Users
+            </NavLink>
+            <NavLink className="nav-link" to="/workouts">
+              Workouts
+            </NavLink>
           </div>
         </div>
       </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/activities" element={<Activities />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/teams" element={<Teams />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/workouts" element={<Workouts />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   )

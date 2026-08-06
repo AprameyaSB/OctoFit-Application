@@ -11,6 +11,22 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Environment variables
+
+This frontend uses Vite environment variables with `import.meta.env`. In particular, `VITE_CODESPACE_NAME` is used to construct the API host for GitHub Codespaces preview:
+
+```text
+https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/[component]/
+```
+
+If `VITE_CODESPACE_NAME` is not defined, the app falls back to localhost for development.
+
+Create a local file at `./.env.local` and add:
+
+```env
+VITE_CODESPACE_NAME=your-codespace-name
+```
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
