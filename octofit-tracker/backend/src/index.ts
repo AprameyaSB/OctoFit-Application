@@ -17,6 +17,10 @@ const apiBaseUrl = codespaceName
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (_req, res) => {
+  res.json({ status: 'ok', service: 'octofit-backend', apiBaseUrl, port, message: 'Use /api/health, /api/users, or /api/activities' });
+});
+
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', service: 'octofit-backend', apiBaseUrl, port });
 });
