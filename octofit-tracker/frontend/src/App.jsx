@@ -7,7 +7,7 @@ import Workouts from './components/Workouts.jsx'
 import { getApiBaseUrl, getApiEndpoint } from './api.js'
 import './App.css'
 
-const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
 const apiBaseUrl = getApiBaseUrl()
 const healthUrl = `${apiBaseUrl}/api/health`
 

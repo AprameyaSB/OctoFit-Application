@@ -1,4 +1,4 @@
-const codespaceName = import.meta.env.VITE_CODESPACE_NAME
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim() || ''
 
 function getDefaultApiHost() {
   if (typeof window === 'undefined') {
