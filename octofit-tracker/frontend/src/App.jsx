@@ -1,6 +1,11 @@
 import { Routes, Route, NavLink } from 'react-router-dom'
 import './App.css'
 
+const codespaceName = import.meta.env.CODESPACE_NAME || import.meta.env.VITE_CODESPACE_NAME || ''
+const apiBaseUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000'
+
 function Home() {
   return (
     <div className="container py-5">
@@ -11,7 +16,7 @@ function Home() {
             Track workouts, grow with your team, and stay motivated with a modern multi-tier experience.
           </p>
           <div className="d-flex gap-3">
-            <a className="btn btn-primary btn-lg" href="http://localhost:8000/api/health">
+            <a className="btn btn-primary btn-lg" href={`${apiBaseUrl}/api/health`}>
               Check API health
             </a>
             <a className="btn btn-outline-secondary btn-lg" href="https://vite.dev/" target="_blank" rel="noreferrer">
