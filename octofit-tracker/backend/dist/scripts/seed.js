@@ -11,6 +11,7 @@ const Workout_1 = __importDefault(require("../models/Workout"));
 const connectionString = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db';
 async function seedDatabase() {
     try {
+        console.log('Seed the octofit_db database with test data');
         await mongoose_1.default.connect(connectionString);
         console.log('Connected to octofit_db');
         await Promise.all([
