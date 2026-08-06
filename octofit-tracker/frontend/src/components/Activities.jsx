@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { getApiEndpoint, normalizeListResponse } from '../api.js'
 
+// Codespaces preview API path example:
+// https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities
+
 function formatDate(dateString) {
   return dateString ? new Date(dateString).toLocaleString() : 'N/A'
 }

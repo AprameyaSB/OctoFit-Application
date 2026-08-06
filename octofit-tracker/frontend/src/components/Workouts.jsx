@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { getApiEndpoint, normalizeListResponse } from '../api.js'
 
+// Codespaces preview API path example:
+// https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts
+
 export default function Workouts() {
   const [workouts, setWorkouts] = useState([])
   const [loading, setLoading] = useState(true)
